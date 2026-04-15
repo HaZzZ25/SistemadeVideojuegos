@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Ventas</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;}
+        .panel { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px;}
+        table { width: 100%; border-collapse: collapse; margin-top: 20px;}
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #17a2b8; color: white; }
+        .btn { padding: 10px 20px; color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none;}
+        .btn-buscar { background-color: #007bff; }
+        .btn-pdf { background-color: #dc3545; float: right; font-weight: bold;}
+        .total-box { background-color: #28a745; color: white; padding: 15px; border-radius: 5px; text-align: right; font-size: 20px; font-weight: bold; margin-top: 20px;}
+        input[type="date"] { padding: 8px; border-radius: 4px; border: 1px solid #ccc;}
+    </style>
+</head>
+<body>
+
+<a th:href="@{/principal}" class="btn" style="background-color: gray; margin-bottom: 20px; display: inline-block;">⬅ Volver al Menú</a>
+
+<div class="panel">
+    <h2>Reporte Diario de Ventas</h2>
+
+    <form th:action="@{/reportes}" method="get" style="margin-bottom: 20px;">
+        <label><strong>Selecciona una fecha:</strong></label>
+        <input type="date" name="fecha" th:value="${fechaSeleccionada}" required>
+        <button type="submit" class="btn btn-buscar">Buscar Ventas</button>
+
+        <a th:href="@{/reportes/pdf(fecha=${fechaSeleccionada})}" class="btn btn-pdf">Descargar PDF</a>
+    </form>
+
+    <h3 th:text="'Ventas del día: ' + ${#temporals.format(fechaSeleccionada, 'dd/MM/yyyy')}"></h3>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID Ticket</th>
+            <th>Hora</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Total Pagado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(ventas)}">
+            <td colspan="5" style="text-align: center; color: red; font-weight: bold; padding: 20px;">
+                No hay ventas registradas en esta fecha.
+            </td>
+        </tr>
+        <tr th:each="venta : ${ventas}">
+            <td th:text="${venta.idVenta}"></td>
+            <td th:text="${#temporals.format(venta.fecha, 'HH:mm')}"></td>
+            <td th:text="${venta.cliente}"></td>
+            <td th:text="${venta.producto}"></td>
+            <td th:text="${'$' + venta.total}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="total-box">
+        Total de Ingresos: <span th:text="${'$' + totalDelDia}"></span>
+    </div>
+</div>
+
+</body>
+</html>

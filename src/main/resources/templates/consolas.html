@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Consolas</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;}
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white;}
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        .btn { padding: 8px 12px; text-decoration: none; color: white; border-radius: 4px; display: inline-block;}
+        .btn-nuevo { background-color: #28a745; margin-bottom: 10px;}
+        .btn-editar { background-color: #ffc107; color: black;}
+        .btn-eliminar { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+<h2>Inventario de Consolas</h2>
+<a th:href="@{/consolas/nuevo}" class="btn btn-nuevo">Agregar Nueva Consola</a>
+<a th:href="@{/principal}" class="btn" style="background-color: gray;">Volver al Menú</a>
+<table>
+    <thead>
+    <tr><th>ID</th><th>Nombre</th><th>Marca</th><th>Precio</th><th>Stock</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+    <tr th:each="consola : ${listaConsolas}">
+        <td th:text="${consola.idConsola}"></td>
+        <td th:text="${consola.nombre}"></td>
+        <td th:text="${consola.marca}"></td>
+        <td th:text="${'$' + consola.precio}"></td>
+        <td th:text="${consola.stock}"></td>
+        <td>
+            <a th:href="@{/consolas/editar/{id}(id=${consola.idConsola})}" class="btn btn-editar">Editar</a>
+            <a th:href="@{/consolas/eliminar/{id}(id=${consola.idConsola})}" class="btn btn-eliminar" onclick="return confirm('¿Seguro que deseas eliminarla?');">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

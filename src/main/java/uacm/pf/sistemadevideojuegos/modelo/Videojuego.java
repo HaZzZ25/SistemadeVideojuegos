@@ -1,20 +1,24 @@
 package uacm.pf.sistemadevideojuegos.modelo;
 
-/**
- *
- * @author achit
- */
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "videojuegos")
 public class Videojuego {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idVideojuego;
+
+    @Column(nullable = false)
     private String nombre;
+
     private String genero;
     private String plataforma;
     private double precio;
     private int stock;
 
-    public Videojuego() {
-    }
+    public Videojuego() {}
 
     public Videojuego(int idVideojuego, String nombre, String genero, String plataforma, double precio, int stock) {
         this.idVideojuego = idVideojuego;
@@ -25,57 +29,23 @@ public class Videojuego {
         this.stock = stock;
     }
 
-    public int getIdVideojuego() {
-        return idVideojuego;
-    }
+    public int getIdVideojuego() { return idVideojuego; }
+    public void setIdVideojuego(int idVideojuego) { this.idVideojuego = idVideojuego; }
 
-    public void setIdVideojuego(int idVideojuego) {
-        this.idVideojuego = idVideojuego;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getGenero() { return genero; }
+    public void setGenero(String genero) { this.genero = genero; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getPlataforma() { return plataforma; }
+    public void setPlataforma(String plataforma) { this.plataforma = plataforma; }
 
-    public String getGenero() {
-        return genero;
-    }
+    public double getPrecio() { return precio; }
+    public void setPrecio(double precio) { this.precio = precio; }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
+    public int getStock() { return stock; }
+    public void setStock(int stock) { this.stock = stock; }
 
-    public String getPlataforma() {
-        return plataforma;
-    }
-
-    public void setPlataforma(String plataforma) {
-        this.plataforma = plataforma;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-    
-    @Override
-    public String toString(){
-        return nombre + " - " + plataforma; // Esto se mostrará en el JComboBox
-    }
-    
+    // El toString del JComboBox ya no es estrictamente necesario en web, pero lo puedes dejar sin problema
 }

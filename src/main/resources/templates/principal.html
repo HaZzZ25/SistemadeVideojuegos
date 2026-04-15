@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú Principal - Sistema de Videojuegos</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-image: url('/imagenes/Fondo.jpg'); background-size: cover; background-position: center; background-attachment: fixed; height: 100vh; }
+        .navbar { background-color: rgba(0, 0, 0, 0.85); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .navbar h1 { margin: 0; font-size: 24px; font-weight: normal; }
+        .logout-btn { background-color: #dc3545; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: background 0.3s; }
+        .logout-btn:hover { background-color: #c82333; }
+        .logout-btn img { width: 20px; height: 20px; filter: invert(1); }
+        .menu-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 60px 20px; }
+        .card { background: rgba(255, 255, 255, 0.9); width: 220px; padding: 40px 20px; border-radius: 15px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); text-decoration: none; color: #333; transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-10px); background: #ffffff; box-shadow: 0 15px 25px rgba(0,123,255,0.3); }
+        .card img { width: 90px; height: 90px; margin-bottom: 20px; }
+        .card h3 { margin: 0; font-size: 22px; color: #007bff; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>🎮 Bienvenido <strong th:text="${usuario.usuario}"></strong> (<span th:text="${usuario.rol}"></span>)</h1>
+    <a th:href="@{/logout}" class="logout-btn">
+        <img src="/imagenes/cerrar-sesion.png" alt="Salir"> Cerrar Sesión
+    </a>
+</div>
+
+<div class="menu-container">
+
+    <a th:href="@{/ventas}" class="card">
+        <img src="/imagenes/ventas.png" alt="Ventas">
+        <h3>Punto de Venta</h3>
+    </a>
+
+    <a th:href="@{/videojuegos}" class="card">
+        <img src="/imagenes/producto.png" alt="Videojuegos">
+        <h3>Videojuegos</h3>
+    </a>
+
+    <a th:href="@{/clientes}" class="card">
+        <img src="/imagenes/cliente.png" alt="Clientes">
+        <h3>Clientes</h3>
+    </a>
+
+    <a th:if="${usuario.rol == 'ADMIN'}" th:href="@{/consolas}" class="card">
+        <img src="/imagenes/categorias.png" alt="Consolas">
+        <h3>Consolas</h3>
+    </a>
+
+    <a th:if="${usuario.rol == 'ADMIN'}" th:href="@{/usuarios}" class="card">
+        <img src="/imagenes/usuario.png" alt="Usuarios">
+        <h3>Usuarios</h3>
+    </a>
+
+    <a th:if="${usuario.rol == 'ADMIN'}" th:href="@{/reportes}" class="card">
+        <img src="/imagenes/reporte.png" alt="Reportes">
+        <h3>Reportes</h3>
+    </a>
+
+    <a th:if="${usuario.rol == 'ADMIN'}" th:href="@{/dashboard}" class="card">
+        <img src="/imagenes/historial.png" alt="Dashboard">
+        <h3>Dashboard / Metricas</h3>
+    </a>
+
+</div>
+
+</body>
+</html>

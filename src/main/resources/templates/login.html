@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Sistema de Videojuegos</title>
+    <style>
+        /* Estilos generales y fondo de pantalla */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Aquí cargamos tu imagen de fondo */
+            background-image: url('/imagenes/Login.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* El "JPanel" central con efecto de cristal (semitransparente) */
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
+            width: 350px;
+            text-align: center;
+        }
+
+        /* Estilo para el logo superior */
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            border-radius: 50%; /* Lo hace circular, quita esto si lo prefieres cuadrado */
+            object-fit: cover;
+        }
+
+        /* Contenedor para alinear ícono y caja de texto */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* Posición de los íconos de usuario y contraseña */
+        .input-group img {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+        /* Cajas de texto (TextField y PasswordField) */
+        .input-group input {
+            width: 100%;
+            padding: 12px 12px 12px 45px; /* El 45px deja espacio para que el ícono no se encime con el texto */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* El botón de Entrar */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <img src="/imagenes/Logo.jpg" alt="Logo" class="logo">
+
+    <h2>Bienvenido</h2>
+
+    <div th:if="${error}" style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #f5c6cb;">
+        <b>¡Atención!</b> <span th:text="${error}"></span>
+    </div>
+
+    <form action="/login" method="post">
+        <div class="input-group">
+            <img src="/imagenes/usuario.png" alt="Usuario">
+            <input type="text" name="usuario" placeholder="Nombre de usuario" required>
+        </div>
+
+        <div class="input-group">
+            <img src="/imagenes/password.png" alt="Contraseña">
+            <input type="password" name="password" placeholder="Contraseña" required>
+        </div>
+
+        <button type="submit">Ingresar</button>
+    </form>
+</div>
+
+</body>
+</html>

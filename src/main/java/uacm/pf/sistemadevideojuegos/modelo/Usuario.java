@@ -1,62 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uacm.pf.sistemadevideojuegos.modelo;
 
-/**
- *
- * @author achit
- */
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
-    
-    private int idUsuario;
-    private String nombreUsuario;
-    private String contrasena;
-    private String rol; // 'administrador' o 'vendedor'
 
-    public Usuario() {
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Usuario(int idUsuario, String nombreUsuario, String contrasena, String rol) {
-        this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.contrasena = contrasena;
-        this.rol = rol;
-    }
+    @Column(nullable = false, unique = true)
+    private String usuario;
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
+    @Column(nullable = false)
+    private String password;
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    // --- NUEVO CAMPO PARA EL ROL ---
+    @Column(nullable = false)
+    private String rol;
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
+    public String getUsuario() { return usuario; }
+    public void setUsuario(String usuario) { this.usuario = usuario; }
 
-    public String getContrasena() {
-        return contrasena;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-    
-    
-    
+    public String getRol() { return rol; }
+    public void setRol(String rol) { this.rol = rol; }
 }

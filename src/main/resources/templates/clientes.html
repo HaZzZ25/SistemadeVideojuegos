@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Clientes</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;}
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white;}
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        .btn { padding: 8px 12px; text-decoration: none; color: white; border-radius: 4px; display: inline-block;}
+        .btn-nuevo { background-color: #28a745; margin-bottom: 10px;}
+        .btn-editar { background-color: #ffc107; color: black;}
+        .btn-eliminar { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+
+<h2>Directorio de Clientes</h2>
+<a th:href="@{/clientes/nuevo}" class="btn btn-nuevo">Agregar Nuevo Cliente</a>
+<a th:href="@{/principal}" class="btn" style="background-color: gray;">Volver al Menú</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cliente : ${listaClientes}">
+        <td th:text="${cliente.idCliente}"></td>
+        <td th:text="${cliente.nombre}"></td>
+        <td th:text="${cliente.direccion}"></td>
+        <td th:text="${cliente.telefono}"></td>
+        <td>
+            <a th:href="@{/clientes/editar/{id}(id=${cliente.idCliente})}" class="btn btn-editar">Editar</a>
+            <a th:href="@{/clientes/eliminar/{id}(id=${cliente.idCliente})}" class="btn btn-eliminar" onclick="return confirm('¿Estás seguro de eliminar a este cliente?');">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

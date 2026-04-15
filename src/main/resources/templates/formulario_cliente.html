@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Cliente</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; padding: 50px; background-color: #f4f4f4;}
+        .form-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 400px;}
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+        .btn { padding: 10px 20px; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px;}
+        .btn-guardar { background-color: #28a745; margin-bottom: 10px;}
+        .btn-cancelar { background-color: #dc3545; display: block; text-align: center; text-decoration: none; box-sizing: border-box;}
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2 th:text="${cliente.idCliente == 0} ? 'Nuevo Cliente' : 'Editar Cliente'"></h2>
+
+    <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post">
+
+        <input type="hidden" th:field="*{idCliente}" />
+
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required>
+
+        <label>Dirección:</label>
+        <input type="text" th:field="*{direccion}" required>
+
+        <label>Teléfono:</label>
+        <input type="text" th:field="*{telefono}" required>
+
+        <button type="submit" class="btn btn-guardar">Guardar</button>
+        <a th:href="@{/clientes}" class="btn btn-cancelar">Cancelar</a>
+    </form>
+</div>
+
+</body>
+</html>
